@@ -1,6 +1,3 @@
-# personalfinal-project-OOP
-
-
 import Cart from "./classes/cart";
 import CartItem from "./classes/cartitems";
 

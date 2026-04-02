@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Ordering System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Restaurant Ordering System</h1>
+    <p>Frontend for CMPS2232 Final Project</p>
+  </header>
+
+  <main>
+    <!-- AUTH SECTION -->
+    <section class="card">
+      <h2>Authentication</h2>
+
+      <div class="grid-2">
+        <div>
+          <h3>Sign Up</h3>
+          <input type="text" id="signupUsername" placeholder="Username" />
+          <input type="email" id="signupEmail" placeholder="Email" />
+          <input type="password" id="signupPassword" placeholder="Password" />
+          <select id="signupRole">
+            <option value="customer">Customer</option>
+            <option value="admin">Admin</option>
+          </select>
+          <button id="signupBtn">Sign Up</button>
+        </div>
+
+        <div>
+          <h3>Login</h3>
+          <input type="text" id="loginUsername" placeholder="Username" />
+          <input type="password" id="loginPassword" placeholder="Password" />
+          <button id="loginBtn">Login</button>
+        </div>
+      </div>
+
+      <div id="authStatus" class="status"></div>
+    </section>
+
+    <!-- CURRENT USER -->
+    <section class="card">
+      <h2>Current User</h2>
+      <div id="currentUserInfo">No user logged in.</div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section class="card">
+      <h2>Menu</h2>
+      <button id="loadMenuBtn">Load Menu</button>
+      <div id="menuContainer" class="menu-grid"></div>
+    </section>
+
+    <!-- CART SECTION -->
+    <section class="card">
+      <h2>Cart</h2>
+      <button id="loadCartBtn">Load My Cart</button>
+      <div id="cartContainer"></div>
+    </section>
+
+    <!-- ORDER SECTION -->
+    <section class="card">
+      <h2>Place Order</h2>
+      <label for="orderType">Order Type:</label>
+      <select id="orderType">
+        <option value="pickup">Pickup</option>
+        <option value="delivery">Delivery</option>
+      </select>
+
+      <input type="text" id="deliveryAddress" placeholder="Delivery Address (required for delivery)" />
+      <button id="placeOrderBtn">Place Order</button>
+      <div id="orderStatus" class="status"></div>
+    </section>
+
+    <!-- USER ORDERS -->
+    <section class="card">
+      <h2>My Orders</h2>
+      <button id="loadMyOrdersBtn">Load My Orders</button>
+      <div id="myOrdersContainer"></div>
+    </section>
+
+    <!-- ADMIN SECTION -->
+    <section class="card">
+      <h2>Admin Panel</h2>
+      <p>Only useful if logged in as admin.</p>
+
+      <button id="loadAllOrdersBtn">Load All Orders</button>
+      <div id="adminOrdersContainer"></div>
+
+      <div class="admin-update-box">
+        <h3>Update Order Status</h3>
+        <input type="number" id="adminOrderId" placeholder="Order ID" />
+        <select id="adminOrderStatus">
+          <option value="pending">pending</option>
+          <option value="preparing">preparing</option>
+          <option value="ready">ready</option>
+          <option value="completed">completed</option>
+          <option value="cancelled">cancelled</option>
+        </select>
+        <button id="updateOrderStatusBtn">Update Status</button>
+      </div>
+
+      <div id="adminStatus" class="status"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

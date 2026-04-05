@@ -2,110 +2,143 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Restaurant Ordering System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Fork & Flame | Modern Food Ordering</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts + simple icons via Font Awesome (free) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <header>
-    <h1>Restaurant Ordering System</h1>
-    <p>Frontend for CMPS2232 Final Project</p>
+  <!-- Modern header with gradient & delivery badge -->
+  <header class="app-header">
+    <div class="header-content">
+      <div class="logo-area">
+        <i class="fas fa-utensils logo-icon"></i>
+        <div>
+          <h1>Fork & Flame</h1>
+          <p class="tagline">Craving delivered · fresh & fast</p>
+        </div>
+      </div>
+      <div class="delivery-chip" id="dynamicLocation">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Naperville, Illinois</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <!-- AUTH SECTION -->
-    <section class="card">
-      <h2>Authentication</h2>
-
-      <div class="grid-2">
-        <div>
-          <h3>Sign Up</h3>
-          <input type="text" id="signupUsername" placeholder="Username" />
-          <input type="email" id="signupEmail" placeholder="Email" />
-          <input type="password" id="signupPassword" placeholder="Password" />
+  <main class="main-container">
+    <!-- auth row: sleek cards side by side -->
+    <div class="auth-zone" id="authZone">
+      <div class="auth-card glass-card">
+        <div class="auth-icon"><i class="fas fa-user-plus"></i></div>
+        <h3>Create account</h3>
+        <input type="text" id="signupUsername" placeholder="Username" autocomplete="off">
+        <input type="email" id="signupEmail" placeholder="Email">
+        <input type="password" id="signupPassword" placeholder="Password">
+        <div class="select-role">
+          <i class="fas fa-user-tag"></i>
           <select id="signupRole">
-            <option value="customer">Customer</option>
-            <option value="admin">Admin</option>
+            <option value="customer">Customer 🍔</option>
+            <option value="admin">Admin 👑</option>
           </select>
-          <button id="signupBtn">Sign Up</button>
         </div>
+        <button id="signupBtn" class="btn-primary">Sign up <i class="fas fa-arrow-right"></i></button>
+      </div>
+      <div class="auth-card glass-card">
+        <div class="auth-icon"><i class="fas fa-sign-in-alt"></i></div>
+        <h3>Welcome back</h3>
+        <input type="text" id="loginUsername" placeholder="Username">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button id="loginBtn" class="btn-secondary">Login <i class="fas fa-lock-open"></i></button>
+      </div>
+      <div id="authStatus" class="status-chip"></div>
+    </div>
 
-        <div>
-          <h3>Login</h3>
-          <input type="text" id="loginUsername" placeholder="Username" />
-          <input type="password" id="loginPassword" placeholder="Password" />
-          <button id="loginBtn">Login</button>
+    <!-- current user snackbar style -->
+    <div class="user-profile-row" id="currentUserInfo">
+      <i class="fas fa-user-circle"></i> <span>No user logged in</span>
+    </div>
+
+    <!-- menu spotlight: similar to reference design -->
+    <section class="menu-spotlight">
+      <div class="section-header">
+        <h2><i class="fas fa-fire"></i> Recommended for you</h2>
+        <button class="see-more-link" id="loadMenuBtn">See more <i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div id="menuContainer" class="menu-grid modern-grid">
+        <!-- dynamic menu items injected here -->
+        <div class="skeleton-card">Tap "See more" to load deliciousness 🍟</div>
+      </div>
+    </section>
+
+    <!-- cart & order row -->
+    <div class="dual-panel">
+      <section class="cart-panel card-glass">
+        <div class="panel-title">
+          <i class="fas fa-shopping-bag"></i> <span>Your bag</span>
+          <button id="loadCartBtn" class="icon-refresh"><i class="fas fa-sync-alt"></i></button>
         </div>
-      </div>
+        <div id="cartContainer" class="cart-items-list">✨ Cart is empty</div>
+      </section>
 
-      <div id="authStatus" class="status"></div>
-    </section>
+      <section class="order-panel card-glass">
+        <div class="panel-title"><i class="fas fa-truck-fast"></i> <span>Order details</span></div>
+        <div class="order-type-group">
+          <label class="type-option">
+            <input type="radio" name="orderTypeRadio" value="pickup" checked> <i class="fas fa-store"></i> Pickup
+          </label>
+          <label class="type-option">
+            <input type="radio" name="orderTypeRadio" value="delivery"> <i class="fas fa-motorcycle"></i> Delivery
+          </label>
+        </div>
+        <div class="address-field" id="addressField">
+          <i class="fas fa-map-pin"></i>
+          <input type="text" id="deliveryAddress" placeholder="Street, city, suite (for delivery)">
+        </div>
+        <button id="placeOrderBtn" class="btn-order">Place order <i class="fas fa-credit-card"></i></button>
+        <div id="orderStatus" class="mini-status"></div>
+      </section>
+    </div>
 
-    <!-- CURRENT USER -->
-    <section class="card">
-      <h2>Current User</h2>
-      <div id="currentUserInfo">No user logged in.</div>
-    </section>
+    <!-- my orders + admin section (clean) -->
+    <div class="orders-area">
+      <section class="card-glass">
+        <div class="flex-between">
+          <h3><i class="fas fa-receipt"></i> My orders</h3>
+          <button id="loadMyOrdersBtn" class="small-outline">Refresh</button>
+        </div>
+        <div id="myOrdersContainer" class="orders-list">📭 No orders yet</div>
+      </section>
 
-    <!-- MENU SECTION -->
-    <section class="card">
-      <h2>Menu</h2>
-      <button id="loadMenuBtn">Load Menu</button>
-      <div id="menuContainer" class="menu-grid"></div>
-    </section>
-
-    <!-- CART SECTION -->
-    <section class="card">
-      <h2>Cart</h2>
-      <button id="loadCartBtn">Load My Cart</button>
-      <div id="cartContainer"></div>
-    </section>
-
-    <!-- ORDER SECTION -->
-    <section class="card">
-      <h2>Place Order</h2>
-      <label for="orderType">Order Type:</label>
-      <select id="orderType">
-        <option value="pickup">Pickup</option>
-        <option value="delivery">Delivery</option>
-      </select>
-
-      <input type="text" id="deliveryAddress" placeholder="Delivery Address (required for delivery)" />
-      <button id="placeOrderBtn">Place Order</button>
-      <div id="orderStatus" class="status"></div>
-    </section>
-
-    <!-- USER ORDERS -->
-    <section class="card">
-      <h2>My Orders</h2>
-      <button id="loadMyOrdersBtn">Load My Orders</button>
-      <div id="myOrdersContainer"></div>
-    </section>
-
-    <!-- ADMIN SECTION -->
-    <section class="card">
-      <h2>Admin Panel</h2>
-      <p>Only useful if logged in as admin.</p>
-
-      <button id="loadAllOrdersBtn">Load All Orders</button>
-      <div id="adminOrdersContainer"></div>
-
-      <div class="admin-update-box">
-        <h3>Update Order Status</h3>
-        <input type="number" id="adminOrderId" placeholder="Order ID" />
-        <select id="adminOrderStatus">
-          <option value="pending">pending</option>
-          <option value="preparing">preparing</option>
-          <option value="ready">ready</option>
-          <option value="completed">completed</option>
-          <option value="cancelled">cancelled</option>
-        </select>
-        <button id="updateOrderStatusBtn">Update Status</button>
-      </div>
-
-      <div id="adminStatus" class="status"></div>
-    </section>
+      <!-- admin panel hidden by default (becomes visible if admin logs in) -->
+      <section class="card-glass admin-panel-hidden" id="adminSection">
+        <div class="flex-between">
+          <h3><i class="fas fa-shield-alt"></i> Admin control</h3>
+          <button id="loadAllOrdersBtn" class="small-outline">All orders</button>
+        </div>
+        <div id="adminOrdersContainer" class="orders-list mini-scroll"></div>
+        <div class="admin-update-row">
+          <input type="number" id="adminOrderId" placeholder="Order ID">
+          <select id="adminOrderStatus">
+            <option value="pending">pending</option>
+            <option value="preparing">preparing</option>
+            <option value="ready">ready for pickup</option>
+            <option value="completed">completed</option>
+            <option value="cancelled">cancelled</option>
+          </select>
+          <button id="updateOrderStatusBtn" class="btn-accent">Update status</button>
+        </div>
+        <div id="adminStatus" class="mini-status"></div>
+      </section>
+    </div>
   </main>
+
+  <!-- floating delivery est. time animation (mock) -->
+  <div class="delivery-estimate" id="deliveryToast" style="display: none;">
+    <i class="fas fa-clock"></i> Estimated delivery time is <span id="etaText">11:34 AM</span>
+  </div>
 
   <script src="script.js"></script>
 </body>

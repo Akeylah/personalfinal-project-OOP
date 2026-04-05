@@ -1,4 +1,4 @@
-import User from "./user";
+import { User } from "./user";
 import Order from "./order";
 
 class Customer extends User {

@@ -1,8 +1,8 @@
-import User from "./user.ts";
+import { User } from "./user";
 
 class Admin extends User {
-  constructor(userId: number, username: string, password: string, email: string) {
-    super(userId, username, password, email, "admin");
+  constructor(id: number, name: string, email: string, password: string) {
+    super(id, name, email, password, "admin");
   }
 
   public viewAllOrders(): string {
